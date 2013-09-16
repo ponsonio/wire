@@ -37,8 +37,8 @@ message SimpleMessage {
   // An optional NestedMessage
   optional NestedMessage optional_nested_msg = 2;
   // An optional ExternalMessage
-  optional ExternalMessage optional_external_msg = 3;
-  optional NestedEnum default_nested_enum = 4 [default = BAZ];
+  optional simple.ExternalMessage optional_external_msg = 3;
+  optional SimpleMessage.NestedEnum default_nested_enum = 4 [default = BAZ];
 
   // A required int32
   required int32 required_int32 = 5 [default = 456];
@@ -47,9 +47,9 @@ message SimpleMessage {
   repeated double repeated_double = 6;
 
   // enum from another package with an explicit default
-  optional squareup.protos.foreign.ForeignEnum default_foreign_enum = 7 [default = BAX];
+  optional foreign.ForeignEnum default_foreign_enum = 7 [default = BAX];
   // enum from another package without an explicit default
-  optional squareup.protos.foreign.ForeignEnum no_default_foreign_enum = 8;
+  optional protos.foreign.ForeignEnum no_default_foreign_enum = 8;
 
   // field with the same name as a Java keyword
   optional string package = 9;
