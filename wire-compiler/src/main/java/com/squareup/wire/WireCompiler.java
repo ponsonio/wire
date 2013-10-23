@@ -785,7 +785,7 @@ public class WireCompiler {
     // JavaWriter will pass the doc through String.format, so escape all '%' chars
     documentation = documentation.replace("%", "%%");
     // Remove trailing whitespace
-    documentation = documentation.replaceAll("\\s+\n", "\n");
+    documentation = documentation.replaceAll("[ \\t]+\n", "\n");
     // Rewrite '@see <url>' to use an html anchor tag
     documentation =
         documentation.replaceAll("@see (http:" + URL_CHARS + "+)", "@see <a href=\"$1\">$1</a>");

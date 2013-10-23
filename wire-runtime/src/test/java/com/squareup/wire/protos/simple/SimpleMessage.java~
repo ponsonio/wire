@@ -198,8 +198,6 @@ public final class SimpleMessage extends Message {
 
     /**
      * An optional int32
-     * 
-     * This comment has a blank line.
      */
     public Builder optional_int32(Integer optional_int32) {
       this.optional_int32 = optional_int32;
