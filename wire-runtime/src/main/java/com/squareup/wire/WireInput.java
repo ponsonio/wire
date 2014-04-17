@@ -85,6 +85,8 @@ final class WireInput {
 
   // -----------------------------------------------------------------
 
+  private byte[] varintBuffer = new byte[10];
+
   /**
    * Attempt to read a field tag, returning zero if we have reached EOF.
    * Protocol message parsers use this to read tags, since a protocol message
@@ -144,38 +146,45 @@ final class WireInput {
    * upper bits.
    */
   public int readVarint32() throws IOException {
-    pos++;
-    byte tmp = source.readByte();
-    if (tmp >= 0) {
-      return tmp;
+    if (source.peek(varintBuffer, 0, 10)) {
+      return readVarint32(varintBuffer);
     }
-    int result = tmp & 0x7f;
+
+    byte tmp;
+
     pos++;
+    int result;
     if ((tmp = source.readByte()) >= 0) {
-      result |= tmp << 7;
+      return tmp;
     } else {
-      result |= (tmp & 0x7f) << 7;
+      result = tmp & 0x7f;
       pos++;
       if ((tmp = source.readByte()) >= 0) {
-        result |= tmp << 14;
+        result |= tmp << 7;
       } else {
-        result |= (tmp & 0x7f) << 14;
+        result |= (tmp & 0x7f) << 7;
         pos++;
         if ((tmp = source.readByte()) >= 0) {
-          result |= tmp << 21;
+          result |= tmp << 14;
         } else {
-          result |= (tmp & 0x7f) << 21;
+          result |= (tmp & 0x7f) << 14;
           pos++;
-          result |= (tmp = source.readByte()) << 28;
-          if (tmp < 0) {
-            // Discard upper 32 bits.
-            for (int i = 0; i < 5; i++) {
-              pos++;
-              if (source.readByte() >= 0) {
-                return result;
+          if ((tmp = source.readByte()) >= 0) {
+            result |= tmp << 21;
+          } else {
+            result |= (tmp & 0x7f) << 21;
+            pos++;
+            result |= (tmp = source.readByte()) << 28;
+            if (tmp < 0) {
+              // Discard upper 32 bits.
+              for (int i = 0; i < 5; i++) {
+                pos++;
+                if (source.readByte() >= 0) {
+                  return result;
+                }
               }
+              throw new IOException(ENCOUNTERED_A_MALFORMED_VARINT);
             }
-            throw new IOException(ENCOUNTERED_A_MALFORMED_VARINT);
           }
         }
       }
@@ -183,8 +192,55 @@ final class WireInput {
     return result;
   }
 
+  private int readVarint32(byte[] buffer) throws IOException {
+    int index = 0;
+    int result;
+    byte tmp;
+
+    outer:
+    if ((tmp = buffer[index++]) >= 0) {
+      result = tmp;
+    } else {
+      result = tmp & 0x7f;
+      if ((tmp = buffer[index++]) >= 0) {
+        result |= tmp << 7;
+      } else {
+        result |= (tmp & 0x7f) << 7;
+        if ((tmp = buffer[index++]) >= 0) {
+          result |= tmp << 14;
+        } else {
+          result |= (tmp & 0x7f) << 14;
+          if ((tmp = buffer[index++]) >= 0) {
+            result |= tmp << 21;
+          } else {
+            result |= (tmp & 0x7f) << 21;
+            result |= (tmp = buffer[index++]) << 28;
+            if (tmp < 0) {
+              // Discard upper 32 bits.
+              for (int i = 0; i < 5; i++) {
+                if (buffer[index++] >= 0) {
+                  break outer;
+                }
+              }
+              pos += index;
+              source.skip(index);
+              throw new IOException(ENCOUNTERED_A_MALFORMED_VARINT);
+            }
+          }
+        }
+      }
+    }
+    pos += index;
+    source.skip(index);
+    return result;
+  }
+
   /** Reads a raw varint up to 64 bits in length from the stream. */
   public long readVarint64() throws IOException {
+    if (source.peek(varintBuffer, 0, 10)) {
+      return readVarint64(varintBuffer);
+    }
+
     int shift = 0;
     long result = 0;
     while (shift < 64) {
@@ -196,6 +252,25 @@ final class WireInput {
       }
       shift += 7;
     }
+    throw new IOException(ENCOUNTERED_A_MALFORMED_VARINT);
+  }
+
+  private long readVarint64(byte[] buffer) throws IOException {
+    int index = 0;
+    int shift = 0;
+    long result = 0;
+    while (shift < 64) {
+      byte b = buffer[index++];
+      result |= (long) (b & 0x7F) << shift;
+      if ((b & 0x80) == 0) {
+        pos += index;
+        source.skip(index);
+        return result;
+      }
+      shift += 7;
+    }
+    pos += index;
+    source.skip(index);
     throw new IOException(ENCOUNTERED_A_MALFORMED_VARINT);
   }
 
