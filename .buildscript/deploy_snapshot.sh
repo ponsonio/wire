@@ -9,6 +9,8 @@ SLUG="square/wire"
 JDK="oraclejdk8"
 BRANCH="version-two"
 
+set -e
+
 if [ "$TRAVIS_REPO_SLUG" != "$SLUG" ]; then
   echo "Skipping snapshot deployment: wrong repository. Expected '$SLUG' but was '$TRAVIS_REPO_SLUG'."
 elif [ "$TRAVIS_JDK_VERSION" != "$JDK" ]; then
