@@ -25,6 +25,11 @@ public final class ForeignMessage extends ExtendableMessage<ForeignMessage> {
   }
 
   @Override
+  public String getMessageName() {
+    return "squareup.protos.foreign.ForeignMessage";
+  }
+
+  @Override
   public boolean equals(Object other) {
     if (other == this) return true;
     if (!(other instanceof ForeignMessage)) return false;

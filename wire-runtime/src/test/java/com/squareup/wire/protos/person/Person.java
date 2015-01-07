@@ -58,6 +58,11 @@ public final class Person extends Message {
   }
 
   @Override
+  public String getMessageName() {
+    return "squareup.protos.person.Person";
+  }
+
+  @Override
   public boolean equals(Object other) {
     if (other == this) return true;
     if (!(other instanceof Person)) return false;
@@ -185,6 +190,11 @@ public final class Person extends Message {
     private PhoneNumber(Builder builder) {
       this(builder.number, builder.type);
       setBuilder(builder);
+    }
+
+    @Override
+    public String getMessageName() {
+      return "squareup.protos.person.Person.PhoneNumber";
     }
 
     @Override

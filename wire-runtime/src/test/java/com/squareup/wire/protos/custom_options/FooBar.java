@@ -106,6 +106,11 @@ public final class FooBar extends ExtendableMessage<FooBar> {
   }
 
   @Override
+  public String getMessageName() {
+    return "squareup.protos.custom_options.FooBar";
+  }
+
+  @Override
   public boolean equals(Object other) {
     if (other == this) return true;
     if (!(other instanceof FooBar)) return false;
@@ -226,6 +231,11 @@ public final class FooBar extends ExtendableMessage<FooBar> {
     }
 
     @Override
+    public String getMessageName() {
+      return "squareup.protos.custom_options.FooBar.Nested";
+    }
+
+    @Override
     public boolean equals(Object other) {
       if (other == this) return true;
       if (!(other instanceof Nested)) return false;
@@ -277,6 +287,11 @@ public final class FooBar extends ExtendableMessage<FooBar> {
     private More(Builder builder) {
       this(builder.serial);
       setBuilder(builder);
+    }
+
+    @Override
+    public String getMessageName() {
+      return "squareup.protos.custom_options.FooBar.More";
     }
 
     @Override

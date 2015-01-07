@@ -25,6 +25,11 @@ public final class ChildPackage extends Message {
   }
 
   @Override
+  public String getMessageName() {
+    return "squareup.protos.ChildPackage";
+  }
+
+  @Override
   public boolean equals(Object other) {
     if (other == this) return true;
     if (!(other instanceof ChildPackage)) return false;

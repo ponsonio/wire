@@ -29,6 +29,11 @@ public final class NotRedacted extends Message {
   }
 
   @Override
+  public String getMessageName() {
+    return "squareup.protos.redacted_test.NotRedacted";
+  }
+
+  @Override
   public boolean equals(Object other) {
     if (other == this) return true;
     if (!(other instanceof NotRedacted)) return false;

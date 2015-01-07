@@ -37,6 +37,11 @@ public final class RedactedRepeated extends Message {
   }
 
   @Override
+  public String getMessageName() {
+    return "squareup.protos.redacted_test.RedactedRepeated";
+  }
+
+  @Override
   public boolean equals(Object other) {
     if (other == this) return true;
     if (!(other instanceof RedactedRepeated)) return false;

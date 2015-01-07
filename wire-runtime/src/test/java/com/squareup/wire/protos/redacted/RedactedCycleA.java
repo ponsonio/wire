@@ -20,6 +20,11 @@ public final class RedactedCycleA extends Message {
   }
 
   @Override
+  public String getMessageName() {
+    return "squareup.protos.redacted_test.RedactedCycleA";
+  }
+
+  @Override
   public boolean equals(Object other) {
     if (other == this) return true;
     if (!(other instanceof RedactedCycleA)) return false;

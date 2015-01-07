@@ -14,6 +14,11 @@ public final class TheRequest extends Message {
   }
 
   @Override
+  public String getMessageName() {
+    return "squareup.wire.protos.roots.TheRequest";
+  }
+
+  @Override
   public boolean equals(Object other) {
     return other instanceof TheRequest;
   }

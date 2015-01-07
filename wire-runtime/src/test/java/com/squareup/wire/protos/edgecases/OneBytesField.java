@@ -25,6 +25,11 @@ public final class OneBytesField extends Message {
   }
 
   @Override
+  public String getMessageName() {
+    return "squareup.protos.edgecases.OneBytesField";
+  }
+
+  @Override
   public boolean equals(Object other) {
     if (other == this) return true;
     if (!(other instanceof OneBytesField)) return false;

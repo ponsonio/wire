@@ -260,6 +260,7 @@ public class MessageWriter {
     emitMessageFields(messageType);
     emitMessageFieldsConstructor(messageType);
     emitMessageBuilderConstructor(messageType);
+    emitMessageGetMessageName(messageType);
     emitMessageEquals(messageType);
     emitMessageHashCode(messageType);
     emitBuilder(messageType);
@@ -342,10 +343,9 @@ public class MessageWriter {
       if (info == null) {
         throw new WireCompilerException("No extension info for " + fqName);
       }
-      sb.append(String.format("%n.setExtension(Ext_%s.%s, %s)",
-          info.location,
+      sb.append(String.format("%n.setExtension(Ext_%s.%s, %s)", info.location,
           compiler.getTrailingSegment(fqName), compiler.getOptionsMapMaker()
-          .createOptionInitializer(entry.getValue(), "", "", info.fqType, false, 0)));
+              .createOptionInitializer(entry.getValue(), "", "", info.fqType, false, 0)));
     }
     sb.append("\n.build()");
     writer.emitField("FieldOptions", "FIELD_OPTIONS_" + fieldName.toUpperCase(Locale.US),
@@ -495,6 +495,21 @@ public class MessageWriter {
       writer.emitStatement("this(%1$s)", params);
     }
     writer.emitStatement("setBuilder(builder)");
+    writer.endMethod();
+  }
+
+  // Example:
+  //
+  // @Override
+  // public String getMessageName() {
+  //   return "squareup.protos.simple.SimpleMessage";
+  // }
+  //
+  private void emitMessageGetMessageName(MessageType messageType) throws IOException {
+    writer.emitEmptyLine();
+    writer.emitAnnotation(Override.class);
+    writer.beginMethod("String", "getMessageName", EnumSet.of(PUBLIC), null, null);
+    writer.emitStatement("return \"" + messageType.getFullyQualifiedName() + "\"");
     writer.endMethod();
   }
 

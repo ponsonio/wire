@@ -24,6 +24,11 @@ public final class Foo extends Message {
   }
 
   @Override
+  public String getMessageName() {
+    return "single_level.Foo";
+  }
+
+  @Override
   public boolean equals(Object other) {
     if (other == this) return true;
     if (!(other instanceof Foo)) return false;

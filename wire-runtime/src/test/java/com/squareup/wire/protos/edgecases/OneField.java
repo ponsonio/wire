@@ -24,6 +24,11 @@ public final class OneField extends Message {
   }
 
   @Override
+  public String getMessageName() {
+    return "squareup.protos.edgecases.OneField";
+  }
+
+  @Override
   public boolean equals(Object other) {
     if (other == this) return true;
     if (!(other instanceof OneField)) return false;

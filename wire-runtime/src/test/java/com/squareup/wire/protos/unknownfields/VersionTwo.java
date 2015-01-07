@@ -47,6 +47,11 @@ public final class VersionTwo extends Message {
   }
 
   @Override
+  public String getMessageName() {
+    return "squareup.protos.unknownfields.VersionTwo";
+  }
+
+  @Override
   public boolean equals(Object other) {
     if (other == this) return true;
     if (!(other instanceof VersionTwo)) return false;

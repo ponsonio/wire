@@ -25,6 +25,11 @@ public final class ExternalMessage extends ExtendableMessage<ExternalMessage> {
   }
 
   @Override
+  public String getMessageName() {
+    return "squareup.protos.simple.ExternalMessage";
+  }
+
+  @Override
   public boolean equals(Object other) {
     if (other == this) return true;
     if (!(other instanceof ExternalMessage)) return false;

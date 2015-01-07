@@ -24,6 +24,11 @@ public final class D extends Message {
   }
 
   @Override
+  public String getMessageName() {
+    return "squareup.protos.roots.D";
+  }
+
+  @Override
   public boolean equals(Object other) {
     if (other == this) return true;
     if (!(other instanceof D)) return false;

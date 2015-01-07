@@ -25,6 +25,11 @@ public final class LetsDataRequest extends Message {
   }
 
   @Override
+  public String getMessageName() {
+    return "com.squareup.services.LetsDataRequest";
+  }
+
+  @Override
   public boolean equals(Object other) {
     if (other == this) return true;
     if (!(other instanceof LetsDataRequest)) return false;

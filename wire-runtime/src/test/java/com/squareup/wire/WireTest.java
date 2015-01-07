@@ -119,6 +119,8 @@ public class WireTest {
     assertEquals(SimpleMessage.NestedEnum.BAR, newMsg.default_nested_enum);
     assertEquals(new Integer(456), newMsg.required_int32);
     assertEquals(doubles, msg.repeated_double);
+
+    assertEquals("squareup.protos.simple.SimpleMessage", msg.getMessageName());
   }
 
   @Test

@@ -147,6 +147,8 @@ public abstract class Message {
   protected Message() {
   }
 
+  public abstract String getMessageName();
+
   /**
    * Initializes any unknown field data to that stored in the given {@code Builder}.
    */

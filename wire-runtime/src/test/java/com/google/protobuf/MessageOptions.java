@@ -66,6 +66,11 @@ public final class MessageOptions extends ExtendableMessage<MessageOptions> {
   }
 
   @Override
+  public String getMessageName() {
+    return "google.protobuf.MessageOptions";
+  }
+
+  @Override
   public boolean equals(Object other) {
     if (other == this) return true;
     if (!(other instanceof MessageOptions)) return false;

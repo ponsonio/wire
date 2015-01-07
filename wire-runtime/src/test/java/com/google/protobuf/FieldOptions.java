@@ -86,6 +86,11 @@ public final class FieldOptions extends ExtendableMessage<FieldOptions> {
   }
 
   @Override
+  public String getMessageName() {
+    return "google.protobuf.FieldOptions";
+  }
+
+  @Override
   public boolean equals(Object other) {
     if (other == this) return true;
     if (!(other instanceof FieldOptions)) return false;

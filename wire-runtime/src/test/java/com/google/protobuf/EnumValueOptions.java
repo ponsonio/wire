@@ -30,6 +30,11 @@ public final class EnumValueOptions extends ExtendableMessage<EnumValueOptions> 
   }
 
   @Override
+  public String getMessageName() {
+    return "google.protobuf.EnumValueOptions";
+  }
+
+  @Override
   public boolean equals(Object other) {
     if (other == this) return true;
     if (!(other instanceof EnumValueOptions)) return false;

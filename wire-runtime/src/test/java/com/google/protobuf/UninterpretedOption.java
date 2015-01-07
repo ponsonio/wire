@@ -76,6 +76,11 @@ public final class UninterpretedOption extends Message {
   }
 
   @Override
+  public String getMessageName() {
+    return "google.protobuf.UninterpretedOption";
+  }
+
+  @Override
   public boolean equals(Object other) {
     if (other == this) return true;
     if (!(other instanceof UninterpretedOption)) return false;
@@ -201,6 +206,11 @@ public final class UninterpretedOption extends Message {
     private NamePart(Builder builder) {
       this(builder.name_part, builder.is_extension);
       setBuilder(builder);
+    }
+
+    @Override
+    public String getMessageName() {
+      return "google.protobuf.UninterpretedOption.NamePart";
     }
 
     @Override

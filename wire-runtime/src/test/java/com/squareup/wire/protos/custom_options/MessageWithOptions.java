@@ -72,6 +72,11 @@ public final class MessageWithOptions extends Message {
   }
 
   @Override
+  public String getMessageName() {
+    return "squareup.protos.custom_options.MessageWithOptions";
+  }
+
+  @Override
   public boolean equals(Object other) {
     return other instanceof MessageWithOptions;
   }

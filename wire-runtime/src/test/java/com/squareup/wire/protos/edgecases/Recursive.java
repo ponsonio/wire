@@ -28,6 +28,11 @@ public final class Recursive extends Message {
   }
 
   @Override
+  public String getMessageName() {
+    return "squareup.protos.edgecases.Recursive";
+  }
+
+  @Override
   public boolean equals(Object other) {
     if (other == this) return true;
     if (!(other instanceof Recursive)) return false;

@@ -14,6 +14,11 @@ public final class NoFields extends Message {
   }
 
   @Override
+  public String getMessageName() {
+    return "squareup.protos.edgecases.NoFields";
+  }
+
+  @Override
   public boolean equals(Object other) {
     return other instanceof NoFields;
   }

@@ -14,6 +14,11 @@ public final class UnnecessaryResponse extends Message {
   }
 
   @Override
+  public String getMessageName() {
+    return "squareup.wire.protos.roots.UnnecessaryResponse";
+  }
+
+  @Override
   public boolean equals(Object other) {
     return other instanceof UnnecessaryResponse;
   }

@@ -25,6 +25,11 @@ public final class SendDataResponse extends Message {
   }
 
   @Override
+  public String getMessageName() {
+    return "com.squareup.services.anotherpackage.SendDataResponse";
+  }
+
+  @Override
   public boolean equals(Object other) {
     if (other == this) return true;
     if (!(other instanceof SendDataResponse)) return false;

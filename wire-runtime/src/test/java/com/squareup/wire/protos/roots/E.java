@@ -29,6 +29,11 @@ public final class E extends Message {
   }
 
   @Override
+  public String getMessageName() {
+    return "squareup.protos.roots.E";
+  }
+
+  @Override
   public boolean equals(Object other) {
     if (other == this) return true;
     if (!(other instanceof E)) return false;
@@ -93,6 +98,11 @@ public final class E extends Message {
     private F(Builder builder) {
       this(builder.i);
       setBuilder(builder);
+    }
+
+    @Override
+    public String getMessageName() {
+      return "squareup.protos.roots.E.F";
     }
 
     @Override

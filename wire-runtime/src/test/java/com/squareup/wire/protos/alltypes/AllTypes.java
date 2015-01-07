@@ -446,6 +446,11 @@ public final class AllTypes extends ExtendableMessage<AllTypes> {
   }
 
   @Override
+  public String getMessageName() {
+    return "squareup.protos.alltypes.AllTypes";
+  }
+
+  @Override
   public boolean equals(Object other) {
     if (other == this) return true;
     if (!(other instanceof AllTypes)) return false;
@@ -1246,6 +1251,11 @@ public final class AllTypes extends ExtendableMessage<AllTypes> {
     private NestedMessage(Builder builder) {
       this(builder.a);
       setBuilder(builder);
+    }
+
+    @Override
+    public String getMessageName() {
+      return "squareup.protos.alltypes.AllTypes.NestedMessage";
     }
 
     @Override

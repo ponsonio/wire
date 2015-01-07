@@ -25,6 +25,11 @@ public final class HeresAllTheDataResponse extends Message {
   }
 
   @Override
+  public String getMessageName() {
+    return "com.squareup.services.HeresAllTheDataResponse";
+  }
+
+  @Override
   public boolean equals(Object other) {
     if (other == this) return true;
     if (!(other instanceof HeresAllTheDataResponse)) return false;

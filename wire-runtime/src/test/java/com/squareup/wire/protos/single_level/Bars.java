@@ -26,6 +26,11 @@ public final class Bars extends Message {
   }
 
   @Override
+  public String getMessageName() {
+    return "single_level.Bars";
+  }
+
+  @Override
   public boolean equals(Object other) {
     if (other == this) return true;
     if (!(other instanceof Bars)) return false;

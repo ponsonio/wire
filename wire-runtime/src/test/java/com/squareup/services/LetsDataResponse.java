@@ -25,6 +25,11 @@ public final class LetsDataResponse extends Message {
   }
 
   @Override
+  public String getMessageName() {
+    return "com.squareup.services.LetsDataResponse";
+  }
+
+  @Override
   public boolean equals(Object other) {
     if (other == this) return true;
     if (!(other instanceof LetsDataResponse)) return false;

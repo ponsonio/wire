@@ -129,6 +129,11 @@ public final class SimpleMessage extends Message {
   }
 
   @Override
+  public String getMessageName() {
+    return "squareup.protos.simple.SimpleMessage";
+  }
+
+  @Override
   public boolean equals(Object other) {
     if (other == this) return true;
     if (!(other instanceof SimpleMessage)) return false;
@@ -322,6 +327,11 @@ public final class SimpleMessage extends Message {
     private NestedMessage(Builder builder) {
       this(builder.bb);
       setBuilder(builder);
+    }
+
+    @Override
+    public String getMessageName() {
+      return "squareup.protos.simple.SimpleMessage.NestedMessage";
     }
 
     @Override
