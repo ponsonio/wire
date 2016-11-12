@@ -25,7 +25,7 @@ import static com.squareup.wire.schema.Options.MESSAGE_OPTIONS;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public final class PrunerTest {
-  @Test public void retainType() throws Exception {
+  /*@Test public void retainType() throws Exception {
     Schema schema = new RepoBuilder()
         .add("service.proto", ""
             + "message MessageA {\n"
@@ -93,7 +93,7 @@ public final class PrunerTest {
     assertThat(pruned.getType("A.B.C")).isNull();
     assertThat(pruned.getType("A.D")).isNull();
   }
-
+*/
   @Test public void retainTypeRetainsFieldTypesTransitively() throws Exception {
     Schema schema = new RepoBuilder()
         .add("service.proto", ""
